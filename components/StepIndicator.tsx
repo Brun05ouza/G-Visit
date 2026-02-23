@@ -12,14 +12,14 @@ interface StepIndicatorProps {
 
 export default function StepIndicator({ currentStep, totalSteps, labels }: StepIndicatorProps) {
   return (
-    <div className="flex items-center justify-center gap-0 w-full">
+    <div className="flex w-full items-center justify-center gap-0 overflow-x-auto">
       {Array.from({ length: totalSteps }).map((_, i) => {
         const step = i + 1
         const isCompleted = step < currentStep
         const isActive = step === currentStep
 
         return (
-          <div key={step} className="flex items-center">
+          <div key={step} className="flex shrink-0 items-center">
             {/* Step bubble */}
             <div className="flex flex-col items-center">
               <motion.div
@@ -40,7 +40,7 @@ export default function StepIndicator({ currentStep, totalSteps, labels }: StepI
                   ease: "easeOut"
                 }}
                 className={cn(
-                  "w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold border-2 transition-colors duration-300 relative",
+                  "flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 text-xs font-semibold transition-colors duration-300 relative sm:h-9 sm:w-9 sm:text-sm",
                   isCompleted && "bg-teal-600 border-teal-600 text-white",
                   isActive && "bg-transparent border-teal-500 text-teal-400",
                   !isCompleted && !isActive && "bg-white/5 border-white/10 text-slate-600"
@@ -77,7 +77,7 @@ export default function StepIndicator({ currentStep, totalSteps, labels }: StepI
               
               <motion.span
                 className={cn(
-                  "text-[10px] mt-1.5 font-medium whitespace-nowrap",
+                  "mt-1 whitespace-nowrap text-[9px] font-medium sm:mt-1.5 sm:text-[10px]",
                   isActive ? "text-teal-400" : isCompleted ? "text-slate-400" : "text-slate-600"
                 )}
                 animate={{
@@ -91,7 +91,7 @@ export default function StepIndicator({ currentStep, totalSteps, labels }: StepI
 
             {/* Connector line */}
             {i < totalSteps - 1 && (
-              <div className="relative w-16 h-[2px] mx-1 mb-5 bg-white/10 overflow-hidden rounded-full">
+              <div className="relative mx-0.5 mb-5 h-[2px] w-8 overflow-hidden rounded-full bg-white/10 sm:mx-1 sm:w-16">
                 <motion.div
                   className="absolute inset-y-0 left-0 bg-gradient-to-r from-teal-600 to-teal-500 rounded-full"
                   initial={{ width: "0%" }}

@@ -90,14 +90,14 @@ export default function Home() {
     <HomeLayout>
       {/* Page Header with animation */}
       <motion.div 
-        className="mb-6 flex items-start justify-between"
+        className="mb-4 flex flex-col gap-4 sm:mb-6 sm:flex-row sm:items-start sm:justify-between sm:gap-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
       >
-        <div>
+        <div className="min-w-0 flex-1">
           <motion.h2 
-            className="text-[32px] font-bold tracking-tight text-white"
+            className="text-[24px] font-bold tracking-tight text-white sm:text-[28px] lg:text-[32px]"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.4 }}
@@ -105,7 +105,7 @@ export default function Home() {
             Visitas
           </motion.h2>
           <motion.p 
-            className="mt-[4px] text-[15px] font-medium text-[#788894]"
+            className="mt-1 text-[13px] font-medium text-[#788894] sm:mt-[4px] sm:text-[15px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.4 }}
@@ -113,16 +113,16 @@ export default function Home() {
             {isToday ? 'Confira a sua agenda de clientes para o dia' : 'Visitas agendadas para a data selecionada'}
           </motion.p>
         </div>
-        <Link href="/agendar">
+        <Link href="/agendar" className="w-full sm:w-auto">
           <motion.button 
-            className="flex items-center gap-2 rounded-xl bg-[#10BCA9] px-6 py-[14px] text-[15px] font-bold text-white shadow-lg transition-colors hover:bg-[#0EA998]"
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#10BCA9] px-4 py-3 text-[14px] font-bold text-white shadow-lg transition-colors hover:bg-[#0EA998] sm:px-6 sm:py-[14px] sm:text-[15px]"
             whileHover={{ scale: 1.03, boxShadow: "0 10px 30px rgba(16, 188, 169, 0.3)" }}
             whileTap={{ scale: 0.97 }}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2, duration: 0.4 }}
           >
-            <Plus className="h-[20px] w-[20px]" strokeWidth={2.5} />
+            <Plus className="h-[18px] w-[18px] sm:h-[20px] sm:w-[20px]" strokeWidth={2.5} />
             Agendar Nova Visita
           </motion.button>
         </Link>
@@ -130,7 +130,7 @@ export default function Home() {
 
       {/* Filter bar with staggered animation */}
       <motion.div 
-        className="mb-6 flex items-center gap-3 flex-wrap"
+        className="mb-4 flex flex-wrap items-center gap-2 sm:mb-6 sm:gap-3"
         variants={containerVariants}
         initial="hidden"
         animate="show"
@@ -141,12 +141,12 @@ export default function Home() {
         </motion.div>
 
         {/* Time filter */}
-        <motion.div className="flex gap-2" variants={filterVariants}>
+        <motion.div className="flex flex-wrap gap-1.5 sm:gap-2" variants={filterVariants}>
           {(Object.keys(TIME_LABELS) as TimeFilter[]).map((f, index) => (
             <motion.button
               key={f}
               onClick={() => setTimeFilter(f)}
-              className={`px-4 py-2.5 rounded-xl text-[14px] font-semibold border transition-colors ${
+              className={`rounded-lg px-3 py-2 text-[13px] font-semibold border transition-colors sm:rounded-xl sm:px-4 sm:py-2.5 sm:text-[14px] ${
                 timeFilter === f
                   ? 'bg-[#183A40] text-white border-[#10BCA9]/40'
                   : 'bg-[#202C33] text-[#8A9BA8] border-[#283842] hover:bg-[#2A3C46]'
@@ -167,7 +167,7 @@ export default function Home() {
           {!loading && (
             <motion.span 
               key={filteredVisits.length}
-              className="ml-auto text-[14px] font-medium text-[#8A9BA8]"
+              className="w-full text-[13px] font-medium text-[#8A9BA8] sm:ml-auto sm:w-auto sm:text-[14px]"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.8 }}
@@ -189,7 +189,7 @@ export default function Home() {
         </div>
       ) : filteredVisits.length === 0 ? (
         <motion.div 
-          className="flex flex-col items-center justify-center rounded-[24px] border border-[#2D3941] bg-[#212E35] px-6 py-[120px] text-center shadow-sm"
+          className="flex flex-col items-center justify-center rounded-2xl border border-[#2D3941] bg-[#212E35] px-4 py-16 text-center shadow-sm sm:rounded-[24px] sm:px-6 sm:py-[120px]"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
@@ -203,7 +203,7 @@ export default function Home() {
             <CalendarCheck className="h-[38px] w-[38px] text-[#10BCA9]" strokeWidth={2} />
           </motion.div>
           <motion.h3 
-            className="mb-4 text-[26px] font-bold tracking-tight text-white"
+            className="mb-3 text-[22px] font-bold tracking-tight text-white sm:mb-4 sm:text-[26px]"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -211,7 +211,7 @@ export default function Home() {
             Agenda Livre
           </motion.h3>
           <motion.p 
-            className="mb-8 max-w-[540px] text-[16px] leading-[1.6] font-medium text-[#8A9BA8]"
+            className="mb-6 max-w-[540px] text-[14px] leading-[1.6] font-medium text-[#8A9BA8] sm:mb-8 sm:text-[16px]"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -238,7 +238,7 @@ export default function Home() {
         </motion.div>
       ) : (
         <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6"
+          className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 xl:grid-cols-3"
           variants={containerVariants}
           initial="hidden"
           animate="show"
@@ -272,16 +272,16 @@ export default function Home() {
                   }}
                 />
 
-                <div className="flex justify-between items-start mb-4">
-                  <div className="flex items-center gap-2">
+                <div className="mb-3 flex items-start justify-between sm:mb-4">
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                     <motion.span 
-                      className="bg-[#10BCA9]/20 text-[#10BCA9] px-2.5 py-1 rounded-md text-sm font-semibold flex items-center gap-1.5"
+                      className="flex items-center gap-1 rounded-md bg-[#10BCA9]/20 px-2 py-0.5 text-xs font-semibold text-[#10BCA9] sm:px-2.5 sm:py-1 sm:text-sm"
                       whileHover={{ scale: 1.05 }}
                     >
                       <Clock className="w-3.5 h-3.5" />
                       {visit.preferredTime}
                     </motion.span>
-                    <span className="bg-white/5 text-slate-300 px-2.5 py-1 rounded-md text-xs font-medium">
+                    <span className="rounded-md bg-white/5 px-2 py-0.5 text-[10px] font-medium text-slate-300 sm:px-2.5 sm:py-1 sm:text-xs">
                       {visit.timeFlexibility === 'flexible' ? 'Flexível' : 'Fixo'}
                     </span>
                   </div>
@@ -319,14 +319,14 @@ export default function Home() {
                 </div>
 
                 <motion.div 
-                  className="mt-5 pt-4 border-t border-white/10 flex gap-2"
+                  className="mt-4 flex flex-wrap gap-2 border-t border-white/10 pt-3 sm:mt-5 sm:pt-4"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 + index * 0.05 }}
                 >
                   <motion.button
                     onClick={() => window.open(`https://wa.me/55${visit.phone.replace(/\D/g, '')}`, '_blank')}
-                    className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#10BCA9] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0EA998]"
+                    className="flex flex-1 items-center justify-center gap-1.5 rounded-lg py-2 px-3 text-xs font-semibold text-white transition-colors hover:bg-[#0EA998] sm:gap-2 sm:rounded-xl sm:px-4 sm:py-2.5 sm:text-sm"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -336,7 +336,7 @@ export default function Home() {
                     WhatsApp
                   </motion.button>
                   <motion.button 
-                    className="flex flex-1 items-center justify-center rounded-xl border border-[#405461] bg-[#2E3D46] px-4 py-2.5 text-sm font-semibold text-[#E6EEF3] transition-colors hover:bg-[#384A54]"
+                    className="flex flex-1 items-center justify-center rounded-lg border border-[#405461] bg-[#2E3D46] px-3 py-2 text-xs font-semibold text-[#E6EEF3] transition-colors hover:bg-[#384A54] sm:rounded-xl sm:px-4 sm:py-2.5 sm:text-sm"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >

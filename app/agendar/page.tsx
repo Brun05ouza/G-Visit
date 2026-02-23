@@ -9,16 +9,16 @@ export default function AgendarPage() {
   return (
     <HomeLayout>
       <motion.div 
-        className="flex flex-col items-center justify-center min-h-[calc(100vh-10rem)]"
+        className="flex flex-col items-center justify-center min-h-[calc(100vh-8rem)] py-6 sm:min-h-[calc(100vh-10rem)] sm:py-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.4 }}
       >
-        <div className="relative z-10 w-full max-w-lg">
+        <div className="relative z-10 w-full max-w-lg px-2 sm:px-0">
           {/* Header */}
-          <div className="text-center mb-8">
+          <div className="mb-6 text-center sm:mb-8">
             <motion.div 
-              className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 shadow-lg mb-4"
+              className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-teal-500 to-teal-600 shadow-lg sm:mb-4 sm:h-14 sm:w-14 sm:rounded-2xl"
               initial={{ scale: 0, rotate: -180 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ 
@@ -47,7 +47,7 @@ export default function AgendarPage() {
             </motion.div>
             
             <motion.h1 
-              className="text-3xl font-bold text-white"
+              className="text-2xl font-bold text-white sm:text-3xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.4 }}
@@ -69,7 +69,7 @@ export default function AgendarPage() {
             </motion.h1>
             
             <motion.p 
-              className="mt-2 text-sm text-slate-400"
+              className="mt-1 text-xs text-slate-400 sm:mt-2 sm:text-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.4 }}
@@ -80,7 +80,7 @@ export default function AgendarPage() {
 
           {/* Card do Formulário */}
           <motion.div
-            className="rounded-2xl border border-white/10 p-6 sm:p-8"
+            className="rounded-xl border border-white/10 p-4 sm:rounded-2xl sm:p-6 md:p-8"
             style={{
               background: "rgba(255,255,255,0.04)",
               backdropFilter: "blur(20px)",
@@ -101,7 +101,7 @@ export default function AgendarPage() {
           </motion.div>
 
           <motion.p 
-            className="mt-6 text-center text-xs text-slate-600"
+            className="mt-4 text-center text-xs text-slate-600 sm:mt-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.4 }}

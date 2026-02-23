@@ -128,35 +128,38 @@ export default function DatePicker({ value, onChange }: DatePickerProps) {
   }
 
   return (
-    <div ref={containerRef} className="relative">
+    <div ref={containerRef} className="relative min-w-0">
       <button
+        type="button"
         onClick={() => setOpen(o => !o)}
-        className={`flex items-center gap-2 rounded-xl border px-4 py-2.5 transition-colors ${
+        className={`flex min-w-0 items-center gap-1.5 rounded-lg border px-3 py-2 transition-colors sm:gap-2 sm:rounded-xl sm:px-4 sm:py-2.5 ${
           open
             ? 'border-[#10BCA9]/40 bg-[#183A40]'
             : 'border-[#283842] bg-[#202C33] hover:bg-[#2A3C46]'
         }`}
       >
-        <Calendar className="h-4 w-4 text-[#10BCA9] shrink-0" strokeWidth={2.5} />
-        <span className="text-[14px] font-semibold text-white">{displayDate}</span>
+        <Calendar className="h-3.5 w-3.5 shrink-0 text-[#10BCA9] sm:h-4 sm:w-4" strokeWidth={2.5} />
+        <span className="truncate text-[12px] font-semibold text-white sm:text-[14px]">{displayDate}</span>
       </button>
 
       {open && (
-        <div className="absolute top-full left-0 mt-2 z-50 w-[288px] rounded-2xl border border-[#283842] bg-[#202C33] shadow-2xl p-4">
+        <div className="absolute top-full left-0 z-50 mt-2 w-[min(288px,calc(100vw-2rem))] rounded-xl border border-[#283842] bg-[#202C33] p-3 shadow-2xl sm:rounded-2xl sm:p-4">
           {/* Month navigation */}
-          <div className="flex items-center justify-between mb-4">
+          <div className="mb-3 flex items-center justify-between sm:mb-4">
             <button
+              type="button"
               onClick={prevMonth}
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-[#8A9BA8] hover:bg-[#2A3C46] hover:text-white transition-colors"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[#8A9BA8] transition-colors hover:bg-[#2A3C46] hover:text-white"
             >
               <ChevronLeft className="h-4 w-4" strokeWidth={2.5} />
             </button>
-            <span className="text-[14px] font-semibold text-white">
+            <span className="truncate text-[13px] font-semibold text-white sm:text-[14px]">
               {MONTHS_PT[viewMonth]} {viewYear}
             </span>
             <button
+              type="button"
               onClick={nextMonth}
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-[#8A9BA8] hover:bg-[#2A3C46] hover:text-white transition-colors"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-[#8A9BA8] transition-colors hover:bg-[#2A3C46] hover:text-white"
             >
               <ChevronRight className="h-4 w-4" strokeWidth={2.5} />
             </button>
@@ -182,7 +185,7 @@ export default function DatePicker({ value, onChange }: DatePickerProps) {
                   key={date}
                   onClick={() => selectDate(date)}
                   className={[
-                    'flex h-9 w-full items-center justify-center rounded-lg text-[13px] transition-colors',
+                    'flex h-8 w-full items-center justify-center rounded-md text-[12px] transition-colors sm:h-9 sm:rounded-lg sm:text-[13px]',
                     isSelected
                       ? 'bg-[#10BCA9] text-white font-bold'
                       : isToday

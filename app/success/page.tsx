@@ -85,7 +85,7 @@ function SuccessContent() {
   }
 
   return (
-    <div className="relative z-10 w-full max-w-md text-center">
+    <div className="relative z-10 w-full max-w-md px-4 text-center sm:px-0">
       <Confetti />
       
       <motion.div
@@ -96,7 +96,7 @@ function SuccessContent() {
         {/* Icon */}
         <motion.div
           variants={itemVariants}
-          className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-teal-500/10 border border-teal-500/30 mb-6 relative"
+          className="relative mb-4 inline-flex h-16 w-16 items-center justify-center rounded-full border border-teal-500/30 bg-teal-500/10 sm:mb-6 sm:h-20 sm:w-20"
         >
           {/* Pulse rings */}
           <motion.span
@@ -135,7 +135,7 @@ function SuccessContent() {
               ease: "easeInOut"
             }}
           >
-            <CheckCircle className="w-10 h-10 text-teal-400" />
+            <CheckCircle className="h-8 w-8 text-teal-400 sm:h-10 sm:w-10" />
           </motion.div>
           
           {/* Sparkles */}
@@ -158,14 +158,14 @@ function SuccessContent() {
         {/* Title */}
         <motion.div variants={itemVariants}>
           <motion.h1 
-            className="text-3xl font-bold text-white mb-2"
+            className="mb-2 text-2xl font-bold text-white sm:text-3xl"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
           >
             Visita agendada!
           </motion.h1>
-          <p className="text-slate-400 text-sm">
+          <p className="text-xs text-slate-400 sm:text-sm">
             {name ? `Obrigado, ${name.split(" ")[0]}!` : "Obrigado!"} Sua solicitação foi recebida.
             Em breve um corretor entrará em contato para confirmar.
           </p>
@@ -176,7 +176,7 @@ function SuccessContent() {
           {(date || time || property) && (
             <motion.div
               variants={itemVariants}
-              className="mt-8 rounded-2xl border border-white/10 p-6 text-left overflow-hidden relative"
+              className="relative mt-6 overflow-hidden rounded-xl border border-white/10 p-4 text-left sm:mt-8 sm:rounded-2xl sm:p-6"
               style={{
                 background: "rgba(255,255,255,0.04)",
                 backdropFilter: "blur(20px)",
@@ -284,7 +284,7 @@ function SuccessContent() {
 
 export default function SuccessPage() {
   return (
-    <main className="relative min-h-screen flex items-center justify-center p-4">
+    <main className="relative flex min-h-screen items-center justify-center p-4 sm:p-6">
       <CanvasBackground />
       <div
         className="fixed inset-0 z-0 pointer-events-none"
