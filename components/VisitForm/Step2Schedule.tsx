@@ -37,7 +37,7 @@ export default function Step2Schedule({ defaultValues, onNext, onBack }: Props) 
   const today = new Date().toISOString().split("T")[0]
 
   return (
-    <form onSubmit={handleSubmit(onNext)} className="flex flex-col gap-5">
+    <form onSubmit={handleSubmit(onNext)} className="flex flex-col gap-5 px-4 sm:px-6">
       <Input
         id="preferredDate"
         label="Data preferida"

@@ -1,5 +1,5 @@
-import { initializeApp, getApps } from "firebase/app"
-import { getFirestore } from "firebase/firestore"
+import { initializeApp, getApps, type FirebaseApp } from "firebase/app"
+import { getFirestore, type Firestore } from "firebase/firestore"
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -10,5 +10,16 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 }
 
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0]
-export const db = getFirestore(app)
+// Só inicializa o Firebase se as credenciais mínimas existirem (evita erro sem .env)
+const hasRequiredConfig =
+  typeof firebaseConfig.apiKey === "string" &&
+  firebaseConfig.apiKey.length > 0 &&
+  typeof firebaseConfig.projectId === "string" &&
+  firebaseConfig.projectId.length > 0
+
+let app: FirebaseApp | null = null
+if (hasRequiredConfig) {
+  app = getApps().length === 0 ? initializeApp(firebaseConfig) : (getApps()[0] as FirebaseApp)
+}
+
+export const db: Firestore | null = app ? getFirestore(app) : null

@@ -13,38 +13,20 @@ import type { Step1Data, Step2Data, Step3Data } from "@/lib/schema"
 
 const STEP_LABELS = ["Dados", "Agenda", "Imóvel"]
 
-// Enhanced slide variants with spring physics
+// Slide variants (offset menor para não cortar em containers com padding)
 const slideVariants = {
   enter: (direction: number) => ({
-    x: direction > 0 ? 100 : -100,
+    x: direction > 0 ? 24 : -24,
     opacity: 0,
-    scale: 0.95,
-    filter: "blur(4px)",
   }),
   center: {
     x: 0,
     opacity: 1,
-    scale: 1,
-    filter: "blur(0px)",
   },
   exit: (direction: number) => ({
-    x: direction > 0 ? -100 : 100,
+    x: direction > 0 ? -24 : 24,
     opacity: 0,
-    scale: 0.95,
-    filter: "blur(4px)",
   }),
-}
-
-// Container animation
-const containerVariants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
-    },
-  },
 }
 
 export default function VisitForm() {
@@ -82,12 +64,7 @@ export default function VisitForm() {
   }
 
   return (
-    <motion.div 
-      className="flex flex-col gap-6"
-      variants={containerVariants}
-      initial="hidden"
-      animate="show"
-    >
+    <>
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -96,7 +73,7 @@ export default function VisitForm() {
         <StepIndicator currentStep={step} totalSteps={3} labels={STEP_LABELS} />
       </motion.div>
 
-      <motion.div 
+      <motion.div
         className="overflow-hidden"
         animate={shake ? { x: [0, -10, 10, -10, 10, 0] } : {}}
         transition={{ duration: 0.4 }}
@@ -109,8 +86,8 @@ export default function VisitForm() {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ 
-              duration: 0.4, 
+            transition={{
+              duration: 0.4,
               ease: [0.25, 0.46, 0.45, 0.94],
             }}
           >
@@ -139,9 +116,8 @@ export default function VisitForm() {
         </AnimatePresence>
       </motion.div>
 
-      {/* Progress indicator */}
-      <motion.div 
-        className="flex justify-center gap-2 mt-2"
+      <motion.div
+        className="mt-2 flex justify-center gap-2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
@@ -150,15 +126,13 @@ export default function VisitForm() {
           <motion.div
             key={s}
             className={`h-1.5 rounded-full transition-all duration-300 ${
-              s === step ? 'w-8 bg-[#10BCA9]' : s < step ? 'w-4 bg-[#10BCA9]/50' : 'w-4 bg-white/10'
+              s === step ? "w-8 bg-[#10BCA9]" : s < step ? "w-4 bg-[#10BCA9]/50" : "w-4 bg-white/10"
             }`}
-            animate={{
-              scale: s === step ? 1 : 0.9,
-            }}
+            animate={{ scale: s === step ? 1 : 0.9 }}
             transition={{ duration: 0.2 }}
           />
         ))}
       </motion.div>
-    </motion.div>
+    </>
   )
 }

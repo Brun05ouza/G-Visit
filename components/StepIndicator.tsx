@@ -12,7 +12,7 @@ interface StepIndicatorProps {
 
 export default function StepIndicator({ currentStep, totalSteps, labels }: StepIndicatorProps) {
   return (
-    <div className="flex w-full items-center justify-center gap-0 overflow-x-auto">
+    <div className="flex w-full items-center justify-center gap-0 overflow-x-auto py-4 sm:py-5">
       {Array.from({ length: totalSteps }).map((_, i) => {
         const step = i + 1
         const isCompleted = step < currentStep

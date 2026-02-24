@@ -33,7 +33,7 @@ export default function Step1Personal({ defaultValues, onNext }: Props) {
   })
 
   return (
-    <form onSubmit={handleSubmit(onNext)} className="flex flex-col gap-5">
+    <form onSubmit={handleSubmit(onNext)} className="flex flex-col gap-5 px-4 sm:px-6">
       <Input
         id="name"
         label="Nome completo"

@@ -26,7 +26,7 @@ export default function Step3Property({ defaultValues, onSubmit, onBack, loading
   })
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
+    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5 px-4 sm:px-6">
       <Input
         id="propertyInterest"
         label="Imóvel de interesse"

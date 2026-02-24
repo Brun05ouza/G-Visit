@@ -1,4 +1,4 @@
-import { collection, addDoc, serverTimestamp, query, where, getDocs } from "firebase/firestore"
+import { collection, addDoc, serverTimestamp, query, where, getDocs, doc, deleteDoc } from "firebase/firestore"
 import { db } from "./firebase"
 import type { FullFormData } from "./schema"
 
@@ -15,6 +15,12 @@ export async function saveVisit(data: FullFormData): Promise<string> {
     // Simula a latência da rede
     await new Promise(resolve => setTimeout(resolve, 800));
     return id;
+  }
+
+  if (!db) {
+    throw new Error(
+      "Firebase não configurado. Crie um arquivo .env.local com NEXT_PUBLIC_FIREBASE_API_KEY e NEXT_PUBLIC_FIREBASE_PROJECT_ID (e demais variáveis do projeto no Firebase Console)."
+    );
   }
 
   const docRef = await addDoc(collection(db, "visits"), {
@@ -35,6 +41,12 @@ export async function getVisitsByDate(date: string): Promise<(FullFormData & { i
       .sort((a, b) => a.preferredTime.localeCompare(b.preferredTime));
   }
 
+  if (!db) {
+    throw new Error(
+      "Firebase não configurado. Crie um arquivo .env.local com NEXT_PUBLIC_FIREBASE_API_KEY e NEXT_PUBLIC_FIREBASE_PROJECT_ID."
+    );
+  }
+
   const q = query(
     collection(db, "visits"),
     where("preferredDate", "==", date)
@@ -47,4 +59,23 @@ export async function getVisitsByDate(date: string): Promise<(FullFormData & { i
   })) as (FullFormData & { id: string })[]
 
   return visits.sort((a, b) => a.preferredTime.localeCompare(b.preferredTime))
+}
+
+export async function deleteVisit(id: string): Promise<void> {
+  if (isMockMode) {
+    const saved = JSON.parse(localStorage.getItem("@gevisit:visits") || "[]") as (FullFormData & { id: string })[]
+    localStorage.setItem(
+      "@gevisit:visits",
+      JSON.stringify(saved.filter((v) => v.id !== id))
+    )
+    return
+  }
+
+  if (!db) {
+    throw new Error(
+      "Firebase não configurado. Crie um arquivo .env.local com NEXT_PUBLIC_FIREBASE_API_KEY e NEXT_PUBLIC_FIREBASE_PROJECT_ID."
+    )
+  }
+
+  await deleteDoc(doc(db, "visits", id))
 }
